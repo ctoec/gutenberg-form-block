@@ -2,7 +2,7 @@ import { PostList } from "./PostList";
 import * as api from '../utils/api';
 import { uniqueById, debounce } from '../utils/useful-funcs';
 
-const { BlockIcon } = wp.blocks;
+const { BlockIcon } = wp.editor;
 const { Component } = wp.element;
 
 /**
@@ -21,7 +21,7 @@ export class PostSelector extends Component {
 		this.state = {
 			posts: [],
 			loading: false,
-			type: 'post',
+			type: 'forms-documents',
 			types: [],
 			filter: '',
 			filterLoading: false,
@@ -324,33 +324,28 @@ export class PostSelector extends Component {
 							/>
 						</label>
 					</div>
-					<div className="filter">
-						<label htmlFor="options">Post Type: </label>
-						<select name="options"
-								id="options"
-								onChange={this.handlePostTypeChange}
-						>
-							{ this.state.types.length < 1 ? (<option value="">loading</option>) : Object.keys(this.state.types).map(key => <option key={key} value={key}>{this.state.types[key].name}</option>) }
-						</select>
-					</div>
 				</div>
 				<div className="post-selectorContainer">
-					<PostList
-						posts={postList}
-						loading={this.state.initialLoading||this.state.loading||this.state.filterLoading}
-						filtered={isFiltered}
-						action={this.addPost}
-						paging={this.state.paging}
-						canPaginate={canPaginate}
-						doPagination={this.doPagination}
-						icon={addIcon}
-					/>
-					<PostList
-						posts={this.getSelectedPosts()}
-						loading={this.state.initialLoading}
-						action={this.removePost}
-						icon={removeIcon}
-					/>
+					<div className={"post-selected"}>
+						<PostList
+							posts={this.getSelectedPosts()}
+							loading={this.state.initialLoading}
+							action={this.removePost}
+							icon={removeIcon}
+						/>
+					</div>
+					<div className={"post-available"}>
+						<PostList
+							posts={postList}
+							loading={this.state.initialLoading||this.state.loading||this.state.filterLoading}
+							filtered={isFiltered}
+							action={this.addPost}
+							paging={this.state.paging}
+							canPaginate={canPaginate}
+							doPagination={this.doPagination}
+							icon={addIcon}
+						/>
+					</div>
 				</div>
 			</div>
 		);

@@ -41,9 +41,6 @@ registerBlockType( 'bigbite/postlist', {
 	],
 
 	attributes: {
-		blockTitle: {
-			type: 'string'
-		},
 		selectedPosts: {
 			type: 'array',
 			default: []
@@ -63,12 +60,7 @@ registerBlockType( 'bigbite/postlist', {
 			super(...arguments);
 			this.props = props;
 
-			this.onTitleChange = this.onTitleChange.bind(this);
 			this.updateSelectedPosts = this.updateSelectedPosts.bind(this);
-		}
-
-		onTitleChange(blockTitle) {
-			this.props.setAttributes({ blockTitle });
 		}
 
 		updateSelectedPosts( selectedPosts ) {
@@ -80,12 +72,6 @@ registerBlockType( 'bigbite/postlist', {
 
 			return (
 				<div className={className}>
-					<div className="title-wrapper">
-						<PlainText
-							value={blockTitle}
-							onChange={this.onTitleChange}
-						/>
-					</div>
 					<PostSelector
 						selectedPosts={this.props.attributes.selectedPosts}
 						updateSelectedPosts={this.updateSelectedPosts}

@@ -32,13 +32,38 @@ function render_guten_post_list_filter( $query, $title ) {
 	}
 
 	ob_start();
+		
+	?>
+	<ul class="block-form-list">
+	<?php
+
 	while( $query->have_posts() ):
 		$query->the_post();
-		?>
-		<article>
-			<h1><?php the_title(); ?></h1>
-		</article>
+
+		$id = get_the_ID();
+
+		$meta = get_post_meta($id);
+		
+		if (array_key_exists('pdf_file', $meta)) {
+			$link = wp_get_attachment_url($meta['pdf_file'][0]);
+		} else {
+			$link = $meta['pdf_url'][0];
+		}
+	?>
+		<li class="block-form-list-item">
+			<article class="block-form">
+				<a href="<?php print $link ?>" class="block-form-link">
+					<div class="block-form-title"><?php the_title(); ?></div>
+					<?php if (array_key_exists('pdf_subtitle', $meta)) { ?>
+						<div class="block-form-subtitle"><?php print $meta['pdf_subtitle'][0]; ?></div>
+					<?php } ?>
+				</a>
+			</article>
+		</li>
 	<?php
 	endwhile;
+	?>
+	</ul>
+	<?php
 	return ob_get_clean();
 }

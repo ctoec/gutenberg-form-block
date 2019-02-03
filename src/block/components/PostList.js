@@ -10,19 +10,27 @@ export const PostList = props => {
 	const { filtered = false, loading = false, posts = [], action = () => {}, icon = null } = props;
 
 	if (loading) {
-		return <p>Loading posts...</p>;
+		return (
+			<div className="post-list">
+				<div className={'post-item post-item--message'}>Loading posts...</div>
+			</div>
+		);
 	}
 
 	if (filtered && posts.length < 1) {
 		return (
 			<div className="post-list">
-				<p>Your query yielded no results, please try again.</p>
+				<div className={'post-item post-item--error'}>Your query yielded no results, please try again.</div>
 			</div>
 		);
 	}
 
 	if ( ! posts || posts.length < 1 ) {
-		return <p>No posts.</p>
+		return (
+			<div className="post-list">
+				<div className={'post-item post-item--none'}>No items selected. Add one from below.</div>
+			</div>
+		)
 	}
 
 	return (
