@@ -31,13 +31,13 @@ const { Component } = wp.element;
  */
 registerBlockType( 'bigbite/postlist', {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __( 'guten-post-list - CGB Block' ), // Block title.
-	icon: 'shield', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
+	title: __( 'Forms List' ), // Block title.
+	icon: 'list-view', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
 	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
-		__( 'guten-post-list — CGB Block' ),
-		__( 'CGB Example' ),
-		__( 'create-guten-block' ),
+		__( 'Forms List' ),
+		__( 'PDFs' ),
+		__( 'Applications' ),
 	],
 
 	attributes: {
