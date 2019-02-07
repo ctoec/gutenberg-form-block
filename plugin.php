@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name: guten-post-list — CGB Gutenberg Block Plugin
+ * Plugin Name: Guten Forms List
  * Plugin URI: https://github.com/ahmadawais/create-guten-block/
- * Description: guten-post-list — is a Gutenberg plugin created via create-guten-block.
- * Author: mrahmadawais, maedahbatool
- * Author URI: https://AhmadAwais.com/
+ * Description: A plugin to add forms to a list
+ * Author: matthewcrist
+ * Author URI: https://govbloom.com
  * Version: 1.0.0
  * License: GPL2+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
