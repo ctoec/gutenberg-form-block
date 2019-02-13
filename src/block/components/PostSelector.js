@@ -334,18 +334,20 @@ export class PostSelector extends Component {
 							icon={removeIcon}
 						/>
 					</div>
-					<div className={"post-available"}>
-						<PostList
-							posts={postList}
-							loading={this.state.initialLoading||this.state.loading||this.state.filterLoading}
-							filtered={isFiltered}
-							action={this.addPost}
-							paging={this.state.paging}
-							canPaginate={canPaginate}
-							doPagination={this.doPagination}
-							icon={addIcon}
-						/>
-					</div>
+					{isFiltered && (
+						<div className={"post-available"}>
+							<PostList
+								posts={postList}
+								loading={this.state.initialLoading||this.state.loading||this.state.filterLoading}
+								filtered={isFiltered}
+								action={this.addPost}
+								paging={this.state.paging}
+								canPaginate={canPaginate}
+								doPagination={this.doPagination}
+								icon={addIcon}
+							/>
+						</div>
+					)}
 				</div>
 			</div>
 		);
