@@ -10,7 +10,7 @@
  */
 export const Post = ({ title: { rendered: postTitle } = {}, clickHandler, id: postId, featured_image = false, icon }) => (
 	<article className="post-item" onClick={() => clickHandler(postId)}>
-		<h3 className="post-title">{postTitle}</h3>
+		<h3 className="post-title" dangerouslySetInnerHTML={{__html: `${postTitle}`}}></h3>
     <button className="post-toggle">{icon}</button>
 	</article>
 );
