@@ -35,7 +35,7 @@ export const PostList = props => {
 
 	return (
 		<div class="post-list">
-			{posts.map((post) => <Post key={post.id} {...post} clickHandler={action} icon={icon} />)}
+			{posts.map((post) => <Post key={post.id} {...post} clickHandler={action} icon={icon} embedded={post._embedded} />)}
 			{props.canPaginate ? (<button onClick={props.doPagination} disabled={props.paging}>{props.paging ? 'Loading...' : 'Load More'}</button>) : null}
 		</div>
 	);

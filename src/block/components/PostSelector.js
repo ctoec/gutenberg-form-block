@@ -81,7 +81,7 @@ export class PostSelector extends Component {
 		const pageKey = this.state.filter ? false : this.state.type;
 
 		const defaultArgs = {
-			per_page: 10,
+			per_page: 5,
 			type: this.state.type,
 			search: this.state.filter,
 			page: this.state.pages[pageKey] || 1
@@ -97,23 +97,10 @@ export class PostSelector extends Component {
 		return api.getPosts(requestArguments)
 			.then(response => {
 				const { data } = response;
-				const posts = data.map(p => {
-					if (!p.featured_media || p.featured_media < 1) {
-						return {
-							...p,
-							featured_image: false
-						};
-					}
-
-					return {
-						...p,
-						featured_image: p._embedded['wp:featuredmedia'][0].source_url || false
-					}
-				});
 
 				return {
 					...response,
-					data: posts
+					data: data
 				};
 			})
 			.then(response => {
@@ -334,18 +321,20 @@ export class PostSelector extends Component {
 							icon={removeIcon}
 						/>
 					</div>
-					<div className={"post-available"}>
-						<PostList
-							posts={postList}
-							loading={this.state.initialLoading||this.state.loading||this.state.filterLoading}
-							filtered={isFiltered}
-							action={this.addPost}
-							paging={this.state.paging}
-							canPaginate={canPaginate}
-							doPagination={this.doPagination}
-							icon={addIcon}
-						/>
-					</div>
+					{isFiltered && (
+						<div className={"post-available"}>
+							<PostList
+								posts={postList}
+								loading={this.state.initialLoading||this.state.loading||this.state.filterLoading}
+								filtered={isFiltered}
+								action={this.addPost}
+								paging={this.state.paging}
+								canPaginate={canPaginate}
+								doPagination={this.doPagination}
+								icon={addIcon}
+							/>
+						</div>
+					)}
 				</div>
 			</div>
 		);
