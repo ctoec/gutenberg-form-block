@@ -81,7 +81,7 @@ export class PostSelector extends Component {
 		const pageKey = this.state.filter ? false : this.state.type;
 
 		const defaultArgs = {
-			per_page: 10,
+			per_page: 5,
 			type: this.state.type,
 			search: this.state.filter,
 			page: this.state.pages[pageKey] || 1
@@ -97,23 +97,10 @@ export class PostSelector extends Component {
 		return api.getPosts(requestArguments)
 			.then(response => {
 				const { data } = response;
-				const posts = data.map(p => {
-					if (!p.featured_media || p.featured_media < 1) {
-						return {
-							...p,
-							featured_image: false
-						};
-					}
-
-					return {
-						...p,
-						featured_image: p._embedded['wp:featuredmedia'][0].source_url || false
-					}
-				});
 
 				return {
 					...response,
-					data: posts
+					data: data
 				};
 			})
 			.then(response => {

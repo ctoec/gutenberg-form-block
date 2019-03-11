@@ -16,6 +16,5 @@ export const getPostTypes = () => axios.get('/wp-json/wp/v2/types');
  */
 export const getPosts = ({ restBase = false, ...args }) => {
 	const queryString = Object.keys(args).map(arg => `${arg}=${args[arg]}`).join('&');
-
-	return axios.get(`/wp-json/wp/v2/${restBase}?${queryString}&_embed`);
+	return axios.get(`/wp-json/wp/v2/${restBase}?${queryString}&_embed=1`);
 };
