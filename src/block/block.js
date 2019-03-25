@@ -64,6 +64,7 @@ registerBlockType( 'bigbite/postlist', {
 		}
 
 		updateSelectedPosts( selectedPosts ) {
+			console.log(selectedPosts);
 			this.props.setAttributes({ selectedPosts });
 		}
 

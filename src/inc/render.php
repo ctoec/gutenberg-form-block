@@ -12,8 +12,8 @@ function bb_render_post_list_block( $attributes ) {
 
 	$object_query = new WP_Query([
 		'post__in'  => $selected_posts,
-		'post_type' => get_post_types(),
-		'order_by'  => 'posts__in'
+		'post_type' => 'forms-documents',
+		'orderby'  => 'post__in'
 	]);
 
 	return apply_filters( 'gutenberg_post_list_render_filter', $object_query, $block_title );

@@ -1,4 +1,5 @@
 import { PostList } from "./PostList";
+import PostListSort from "./PostListSort";
 import * as api from '../utils/api';
 import { uniqueById, debounce } from '../utils/useful-funcs';
 
@@ -34,6 +35,7 @@ export class PostSelector extends Component {
 
 		this.addPost = this.addPost.bind(this);
 		this.removePost = this.removePost.bind(this);
+		this.reorderPosts = this.reorderPosts.bind(this);
 		this.handlePostTypeChange = this.handlePostTypeChange.bind(this);
 		this.handleInputFilterChange = this.handleInputFilterChange.bind(this);
 		this.doPostFilter = debounce(this.doPostFilter.bind(this), 300);
@@ -215,6 +217,16 @@ export class PostSelector extends Component {
 		].filter(id => id !== post_id));
 	}
 
+	reorderPosts(posts) {
+		let postsArray = [];
+
+		posts.map((post) => {
+			postsArray.push(post.id);
+		});
+
+		this.props.updateSelectedPosts(postsArray);
+	}
+
 	/**
 	 * Event handler for when the post type select box changes in value.
 	 * @param string type - comes from the event object target.
@@ -314,11 +326,13 @@ export class PostSelector extends Component {
 				</div>
 				<div className="post-selectorContainer">
 					<div className={"post-selected"}>
-						<PostList
+						<PostListSort
 							posts={this.getSelectedPosts()}
 							loading={this.state.initialLoading}
 							action={this.removePost}
 							icon={removeIcon}
+							postsOrder={this.props.selectedPosts}
+							sortAction={this.reorderPosts}
 						/>
 					</div>
 					{isFiltered && (
