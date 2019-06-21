@@ -8,10 +8,10 @@
     "eject": "cgb-scripts eject"
   },
   "dependencies": {
-    "array-move": "^2.0.0",
     "axios": "^0.18.0",
     "cgb-scripts": "1.9.5",
     "react": "^16.8.5",
+    "react-app-polyfill": "^1.0.1",
     "react-dom": "^16.8.5",
     "react-sortable-hoc": "^1.8.3"
   }

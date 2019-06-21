@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import { Post } from './Post';
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
-import arrayMove from 'array-move';
-import { relative } from 'path';
 
 const Handle = SortableHandle(() => {
     return (
@@ -41,6 +39,19 @@ class PostListSort extends Component {
         posts: []
     }
 
+    shiftArray(originalArray, to, from) {
+        const movedItem = originalArray.find((item, index) => index === from);
+        const remainingItems = originalArray.filter((item, index) => index !== from);
+    
+        const reorderedItems = [
+            ...remainingItems.slice(0, to),
+            movedItem,
+            ...remainingItems.slice(to)
+        ];
+    
+        return reorderedItems;
+    }
+
     componentWillReceiveProps(nextProps){
         if(nextProps.posts !== this.state.posts){
            this.setState({posts: nextProps.posts}) 
@@ -50,7 +61,7 @@ class PostListSort extends Component {
     handleSort = ({oldIndex, newIndex}) => {
         let action = this.props.sortAction;
 
-        this.setState({posts: arrayMove(this.state.posts, oldIndex, newIndex)}, () => {
+        this.setState({posts: this.shiftArray(this.state.posts, oldIndex, newIndex)}, () => {
             action(this.state.posts);
         });
     }

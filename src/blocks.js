@@ -9,4 +9,5 @@
  * Webpack is compiling as the input file.
  */
 
+import 'react-app-polyfill/ie11';
 import './block/block.js';
