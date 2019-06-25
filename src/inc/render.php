@@ -35,14 +35,14 @@ function render_guten_post_list_filter( $query, $title ) {
 	ob_start();
 		
 	?>
-	<ul class="block-form-list">
+	<ul class="border-top usa-list usa-list--unstyled border-base-lighter">
 	<?php
+
+	$count = 0;
 
 	while( $query->have_posts() ):
 		$query->the_post();
-
 		$id = get_the_ID();
-
 		$meta = get_post_meta($id);
 		
 		if (array_key_exists('pdf_file', $meta)) {
@@ -51,17 +51,14 @@ function render_guten_post_list_filter( $query, $title ) {
 			$link = $meta['pdf_url'][0];
 		}
 	?>
-		<li class="block-form-list-item">
-			<article class="block-form">
-				<a href="<?php print $link ?>" class="block-form-link">
-					<div class="block-form-title"><?php the_title(); ?></div>
-					<?php if (array_key_exists('pdf_subtitle', $meta)) { ?>
-						<div class="block-form-subtitle"><?php print $meta['pdf_subtitle'][0]; ?></div>
-					<?php } ?>
-				</a>
-			</article>
+		<li class="padding-y-105 border-bottom border-base-lighter">
+			<a href="<?php print $link ?>"><?php the_title(); ?></a>
+			<?php if (array_key_exists('pdf_subtitle', $meta)) { ?>
+				<div class="text-base-dark font-sans-xs text-no-underline"><?php print $meta['pdf_subtitle'][0]; ?></div>
+			<?php } ?>
 		</li>
 	<?php
+	$count++;
 	endwhile;
 	?>
 	</ul>
