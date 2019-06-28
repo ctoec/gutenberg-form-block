@@ -10,14 +10,11 @@ function bb_render_post_list_block( $attributes ) {
 	$block_title    = isset( $attributes['blockTitle'] ) ? $attributes['blockTitle'] : false;
 	$selected_posts = isset( $attributes['selectedPosts'] ) ? $attributes['selectedPosts'] : false;
 
-	$object_query = new WP_Query([
-		'post__in'  => $selected_posts,
-		'post_type' => 'forms-documents',
-		'orderby'  => 'post__in',
-		'posts_per_page' => -1
-	]);
-
-	return apply_filters( 'gutenberg_post_list_render_filter', $object_query, $block_title );
+	if ($selected_posts == false) {
+		return null;
+	} else {
+		return apply_filters( 'gutenberg_post_list_render_filter', $object_query, $block_title );
+	}
 }
 
 /**
