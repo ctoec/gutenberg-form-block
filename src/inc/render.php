@@ -13,6 +13,13 @@ function bb_render_post_list_block( $attributes ) {
 	if ($selected_posts == false) {
 		return null;
 	} else {
+		$object_query = new WP_Query([
+			'post__in'  => $selected_posts,
+			'post_type' => 'forms-documents',
+			'orderby'  => 'post__in',
+			'posts_per_page' => -1
+		]);
+		
 		return apply_filters( 'gutenberg_post_list_render_filter', $object_query, $block_title );
 	}
 }
